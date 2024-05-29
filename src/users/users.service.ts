@@ -9,10 +9,7 @@ import { Model } from 'mongoose';
 export class UsersService {
   constructor(@InjectModel(User.name) private userModel: Model<User>) {}
   create(createUserDto: CreateUserDto) {
-    const newUser = new this.userMode({
-      firstName: 'arash',
-    });
-    return newUser.save();
+    return new this.userModel(createUserDto).save();
   }
 
   findAll() {

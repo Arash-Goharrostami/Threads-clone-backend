@@ -1,7 +1,7 @@
 import { AppModule } from './app.module';
 import { NestFactory } from '@nestjs/core';
 import { ConfigService } from '@nestjs/config';
-import { INestApplication } from '@nestjs/common';
+import { INestApplication, ValidationPipe } from '@nestjs/common';
 
 async function bootstrap() {
   const app: INestApplication = await NestFactory.create(AppModule);
@@ -11,6 +11,7 @@ async function bootstrap() {
   const appHost: string = configService.get<string>('APP_HOST');
 
   app.setGlobalPrefix('api/v1');
+  app.useGlobalPipes(new ValidationPipe());
 
   await app.listen(appPort, appHost);
 
