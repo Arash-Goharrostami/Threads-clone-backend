@@ -1,10 +1,10 @@
 import { Module } from '@nestjs/common';
-import { AppService } from './app.service';
 import { UsersModule } from './users/users.module';
 import { ConfigModule } from '@nestjs/config';
-import { AppController } from './app.controller';
 import { CommentsModule } from './comments/comments.module';
 import { MongooseModule } from '@nestjs/mongoose';
+import { UserRolesModule } from './user-roles/user-roles.module';
+import { UserTokensModule } from './user-tokens/user-tokens.module';
 import * as process from 'node:process';
 
 @Module({
@@ -15,8 +15,8 @@ import * as process from 'node:process';
     MongooseModule.forRoot(process.env.MONGO_DB_URL, {
       dbName: process.env.MONGO_DB_NAME,
     }),
+    UserRolesModule,
+    UserTokensModule,
   ],
-  controllers: [AppController],
-  providers: [AppService],
 })
 export class AppModule {}
